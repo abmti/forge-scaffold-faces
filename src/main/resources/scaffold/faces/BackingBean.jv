@@ -1,0 +1,77 @@
+package com.test.view;
+
+import java.util.List;
+
+import javax.ejb.Stateful;
+import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import br.com.pi.domain.service.Mediator;
+import br.com.pi.interfaces.web.seam.Bean;
+import @{entity.getQualifiedName()};
+import @{basePackage}.domain.service.@{entity.getName()}Mediator;
+
+/**
+ * Backing bean for @{entity.getName()} entities.
+ * <p>
+ * This class provides CRUD functionality for all @{entity.getName()} entities. It focuses
+ * purely on Java EE 6 standards (e.g. <tt>&#64;ConversationScoped</tt> for
+ * state management, <tt>PersistenceContext</tt> for persistence,
+ * <tt>CriteriaBuilder</tt> for searches) rather than introducing a CRUD framework or
+ * custom base class.
+ */
+
+@Named
+@Stateful
+@ConversationScoped
+public class @{entity.getName()}Bean extends Bean<@{entity.getName()}> {
+
+	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private @{entity.getName()}Mediator @{ccEntity}Mediator;
+
+	public String getNameEntity() {
+		return "@{ccEntity}";
+	}
+
+	public @{entity.getName()} get@{entity.getName()}() {
+		return getInstance();
+	}
+
+	@Override
+	public List<@{entity.getName()}> getPageItems() {
+		return super.getPageItems();
+	}
+	
+	@Override
+	public Long getId() {
+		if(get@{entity.getName()}() != null){
+			return get@{entity.getName()}().getId();
+		}
+		return null;
+	}
+
+	@Override
+	public Mediator<@{entity.getName()}> getMediator() {
+		return @{ccEntity}Mediator;
+	}
+
+	//
+	// Support adding children to bidirectional, one-to-many tables
+	//
+
+	private @{entity.getName()} add = new @{entity.getName()}();
+
+	public @{entity.getName()} getAdd() {
+		return this.add;
+	}
+
+	public @{entity.getName()} getAdded() {
+		@{entity.getName()} added = this.add;
+		this.add = new @{entity.getName()}();
+		return added;
+	}
+	
+}

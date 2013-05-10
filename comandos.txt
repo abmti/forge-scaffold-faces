@@ -1,0 +1,26 @@
+
+package -Dmaven.test.skip=true
+
+new-project --named segplan --topLevelPackage br.com.pixidea.segplan
+
+forge install-plugin hibernate-tools
+
+persistence setup --provider HIBERNATE --container JBOSS_AS7
+
+generate-entities --url jdbc:postgresql:segplan --driver org.postgresql.Driver --detectManyToMany --detectOneToOne --detectOptimisticLock 
+
+org.hibernate.dialect.PostgreSQLDialect
+
+/Applications/Java/Servidores/jboss-as-7.1.1.Final_1/modules/org/postgresql/main/postgresql.jar
+
+br.com.pixidea.segplan.domain.entity
+
+forge install-plugin richfaces
+
+scaffold setup --scaffoldType faces
+
+richfaces setup
+
+scaffold from-entity br.com.pixidea.segplan.domain.entity.*
+
+

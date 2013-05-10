@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sf="http://siames.com.br/faces@{metawidgetNamespaces}"
+	template="@{templateStrategy.getReferencePath(template != null ? template : templateStrategy.getDefaultTemplate())}">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{_id}" converter="javax.faces.Long" />
+		<sf:viewAction action="#{@{beanName}.retrieve(_id)}" />
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Visualização @{entityName}"/>
+
+	<ui:define name="header">
+		@{entityName}
+	</ui:define>
+
+	<ui:define name="subheader">
+		Visualização de @{entityName}
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="@{ccEntity}ViewForm">
+			@{metawidget}
+	
+			<div class="buttons">
+				<h:link value="Ver todos" outcome="@{ccEntity}Search" styleClass="btn btn-primary"/> 
+				<h:link value="Editar" outcome="@{ccEntity}Edit" includeViewParams="true" styleClass="btn btn-primary"/>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
