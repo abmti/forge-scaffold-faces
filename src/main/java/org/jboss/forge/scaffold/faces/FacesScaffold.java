@@ -97,7 +97,7 @@ import org.w3c.dom.NamedNodeMap;
  * @author Richard Kennard
  */
 @Alias("faces")
-@Help("JavaServer Faces scaffolding")
+@Help("JavaServer Faces scaffolding ")
 @RequiresFacet({ WebResourceFacet.class,
          DependencyFacet.class,
          PersistenceFacet.class,
